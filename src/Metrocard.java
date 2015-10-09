@@ -11,7 +11,7 @@ public class Metrocard {
 		return currentValue;
 	}
 	
-	public void setCurrentValue(double a) {
+	private void setCurrentValue(double a) {
 		this.currentValue = centRound(a);
 	}
 	
@@ -23,16 +23,12 @@ public class Metrocard {
 		return (int)(currentValue/FARE);
 	}
 	
-	public double addValue(double a) {
-		a=Math.round(a*100)/100.0;
-		currentValue+=a;
-		return a;
+	public void addValue(double a) {
+		currentValue+=centRound(a);
 	}
 	
-	public double removeValue(double a) {
-		a=Math.round(a*100)/100.0;
-		currentValue-=a;
-		return a;
+	public void removeValue(double a) {
+		currentValue-=centRound(a);
 	}
 	
 	public void addRides(int r) {
@@ -44,7 +40,7 @@ public class Metrocard {
 	}
 
 	public double addMoney(double a) {
-		if (a>=5.5)
+		if (a>=2*FARE)
 			a*=BONUS;
 		machineAdded=centRound(a);
 		currentValue+=machineAdded;
@@ -59,7 +55,8 @@ public class Metrocard {
 		return centRound(currentValue%FARE);
 	}
 	
-	private static double centRound(double a) {
+	public static double centRound(double a) {
 		return Math.round(a*100)/100.0;
 	}
+	
 }
